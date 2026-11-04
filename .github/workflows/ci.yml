@@ -1,9 +1,10 @@
 name: YangHooks checks
 on:
   push:
-    branches: [main, yanghooks]
+    branches: [main]
     paths-ignore: ["docs/screenshots/**"]
   pull_request:
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
@@ -42,7 +43,7 @@ jobs:
           path: docs/screenshots/
           if-no-files-found: ignore
       - name: Commit tested formatting and screenshots
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/yanghooks' || github.ref == 'refs/heads/main')
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           git restore .github/workflows/ci.yml
           git add lib public test scripts payload.json server.mjs package.json README.md NOTICE.md .prettierrc.json compose.yaml docs/screenshots

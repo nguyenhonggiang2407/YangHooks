@@ -1,20 +1,20 @@
 # YangHooks · Signed, received, understood
 
-[![YangHooks checks](https://github.com/nguyenhonggiang2407/DTDD/actions/workflows/ci.yml/badge.svg?branch=yanghooks)](https://github.com/nguyenhonggiang2407/DTDD/actions?query=branch%3Ayanghooks)
+[![YangHooks checks](https://github.com/nguyenhonggiang2407/YangHooks/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/nguyenhonggiang2407/YangHooks/actions/workflows/ci.yml)
 
 **Một webhook lab cá nhân: cấp khóa → ký request → nhận HTTP thật → mở receipt → thử gửi lại.**
 
 Ứng dụng Backend / Full-stack của **Nguyễn Hồng Giang (Yang)**. Node.js 24, SQLite và JavaScript thuần; không có dependency runtime ngoài Node.
 
-Nhánh **yanghooks** là một ứng dụng độc lập trong DTDD. Nhánh mặc định là YangCareer; hãy chọn đúng nhánh. Chưa triển khai website công khai.
+Repository độc lập của YangHooks, chuyển từ nhánh `yanghooks` trong DTDD và giữ nguyên lịch sử commit liên quan. Xem [nguồn và kiểm chứng lần tách repository](docs/repository-migration.md). Chưa triển khai website công khai.
 
 ![Webhook inbox](docs/screenshots/desktop.png)
 
 ## Chạy thử
 
 ```sh
-git clone --branch yanghooks --single-branch https://github.com/nguyenhonggiang2407/DTDD.git yanghooks
-cd yanghooks
+git clone https://github.com/nguyenhonggiang2407/YangHooks.git
+cd YangHooks
 npm ci
 npm start
 ```
@@ -43,6 +43,14 @@ node scripts/send.mjs http://127.0.0.1:3140/hooks/ENDPOINT_ID payload.json my-de
 ```
 
 CLI chỉ gửi đến localhost/127.0.0.1, không theo redirect và không in khóa vào kết quả. Lệnh cần Node.js trên máy chạy; CLI không được đóng vào runtime container. Đừng commit khóa thật hay tệp .env.
+
+Trên PowerShell, đặt biến môi trường cho terminal hiện tại trước khi gọi cùng lệnh Node:
+
+```powershell
+$env:YANGHOOKS_SECRET = 'COPY_YOUR_ONE_TIME_KEY'
+node scripts/send.mjs http://127.0.0.1:3140/hooks/ENDPOINT_ID payload.json my-delivery-001
+Remove-Item Env:YANGHOOKS_SECRET
+```
 
 ## Các luồng đã triển khai
 
