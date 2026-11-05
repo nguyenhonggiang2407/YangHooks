@@ -190,6 +190,11 @@ CI định dạng mã, chạy backend/browser, chụp giao diện thật, build/
 
 Reference [motia-content-creation](https://github.com/Trinhvhao/ai-engineering-hub/tree/86dc1699fe036e5cd21ed7d3c57419a7fc3c844b/motia-content-creation) trong fork Trinhvhao; dự án gốc [patchy631/ai-engineering-hub](https://github.com/patchy631/ai-engineering-hub). Giữ nguyên api.step.py tại upstream/, copyright patchy631 và MIT gốc.
 
+Khi kiểm tra liên kết ngày 05/11/2026, URL snapshot trong fork Trinhvhao trả HTTP 404.
+Giữ URL lịch sử để truy nguồn; bản reference vẫn có thể đọc tại
+[upstream/api.step.py](upstream/api.step.py), cùng [LICENSE](LICENSE) và [NOTICE.md](NOTICE.md).
+Lần kiểm tra này chưa đối chiếu lại byte với snapshot bên ngoài không còn truy cập được.
+
 Reference minh họa API nhận request, phát event và trả requestId/status. YangHooks triển khai mới phần HMAC, replay checks, receipt storage, CLI/local sender và UI; không chạy pipeline Motia/LLM hay gửi bài của upstream. Phân định rõ tại [NOTICE.md](NOTICE.md).
 
 Implementation © 2026 Nguyễn Hồng Giang · Upstream © 2024 patchy631 · MIT.
