@@ -10,6 +10,19 @@ Repository độc lập của YangHooks, chuyển từ nhánh `yanghooks` trong 
 
 ![Webhook inbox](docs/screenshots/desktop.png)
 
+## Đọc mã và bằng chứng kỹ thuật
+
+| Chủ đề | Điểm bắt đầu review |
+| --- | --- |
+| HMAC và byte body | [Framing, cửa sổ thời gian và timing-safe comparison](lib/signature.mjs), [test độc lập bằng Node crypto](test/foundation.test.mjs) |
+| Replay và lưu trữ | [Transaction, UNIQUE(endpoint_id, delivery) và kiểm tra owner](lib/store.mjs) |
+| HTTP và CLI | [API regression](test/api.test.mjs), [CLI HTTP thật và giới hạn localhost](test/cli.test.mjs) |
+| Nguồn kế thừa | [NOTICE](NOTICE.md), [lịch sử tách từ DTDD](docs/repository-migration.md) |
+| CI | [Workflow backend, browser và container](.github/workflows/ci.yml), [các lần chạy](https://github.com/nguyenhonggiang2407/YangHooks/actions/workflows/ci.yml) |
+
+CI là bằng chứng theo từng commit; badge không xác nhận một bản triển khai công
+khai. Lab hiện chạy cục bộ, dùng giao thức YangHooks v1 riêng.
+
 ## Chạy thử
 
 ```sh
@@ -176,6 +189,11 @@ CI định dạng mã, chạy backend/browser, chụp giao diện thật, build/
 ## Nguồn và giấy phép
 
 Reference [motia-content-creation](https://github.com/Trinhvhao/ai-engineering-hub/tree/86dc1699fe036e5cd21ed7d3c57419a7fc3c844b/motia-content-creation) trong fork Trinhvhao; dự án gốc [patchy631/ai-engineering-hub](https://github.com/patchy631/ai-engineering-hub). Giữ nguyên api.step.py tại upstream/, copyright patchy631 và MIT gốc.
+
+Khi kiểm tra liên kết ngày 05/11/2026, URL snapshot trong fork Trinhvhao trả HTTP 404.
+Giữ URL lịch sử để truy nguồn; bản reference vẫn có thể đọc tại
+[upstream/api.step.py](upstream/api.step.py), cùng [LICENSE](LICENSE) và [NOTICE.md](NOTICE.md).
+Lần kiểm tra này chưa đối chiếu lại byte với snapshot bên ngoài không còn truy cập được.
 
 Reference minh họa API nhận request, phát event và trả requestId/status. YangHooks triển khai mới phần HMAC, replay checks, receipt storage, CLI/local sender và UI; không chạy pipeline Motia/LLM hay gửi bài của upstream. Phân định rõ tại [NOTICE.md](NOTICE.md).
 

@@ -65,6 +65,16 @@ line ending ở các file nguồn được checkout thành CRLF. Kiểm tra
 NOTICE chỉ để đổi line ending của máy audit. CI Linux tiếp tục kiểm tra định dạng
 chuẩn của Git source.
 
-Ứng dụng chưa có demo internet được xác minh. Dockerfile/Compose được giữ nguyên;
-CI của repository đích cần chạy sau khi xuất bản. Các giới hạn bảy ngày workspace,
-secret lưu đọc được trong SQLite và phạm vi chạy cá nhân vẫn áp dụng như README.
+Ứng dụng chưa có demo internet được xác minh. Dockerfile/Compose được giữ nguyên.
+
+## CI sau khi xuất bản
+
+Kiểm tra ngày 05/11/2026: [run 41748757517](https://github.com/nguyenhonggiang2407/YangHooks/actions/runs/41748757517)
+đã hoàn tất thành công ngày 04/11/2026 cho commit
+[`25cf4809820900c7839998e50c8a40d2fb5bd4d8`](https://github.com/nguyenhonggiang2407/YangHooks/commit/25cf4809820900c7839998e50c8a40d2fb5bd4d8).
+Các bước backend test, browser test và build/smoke-test container đều thành công;
+đây là kết quả CI của commit đó, không phải một lần chạy Docker local trong đợt
+chuyển repository. Xem [workflow và các lần chạy mới hơn](https://github.com/nguyenhonggiang2407/YangHooks/actions/workflows/ci.yml).
+
+Các giới hạn bảy ngày workspace, secret lưu đọc được trong SQLite và phạm vi chạy
+cá nhân vẫn áp dụng như README.
