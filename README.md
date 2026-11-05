@@ -12,13 +12,13 @@ Repository độc lập của YangHooks, chuyển từ nhánh `yanghooks` trong 
 
 ## Đọc mã và bằng chứng kỹ thuật
 
-| Chủ đề | Điểm bắt đầu review |
-| --- | --- |
-| HMAC và byte body | [Framing, cửa sổ thời gian và timing-safe comparison](lib/signature.mjs), [test độc lập bằng Node crypto](test/foundation.test.mjs) |
-| Replay và lưu trữ | [Transaction, UNIQUE(endpoint_id, delivery) và kiểm tra owner](lib/store.mjs) |
-| HTTP và CLI | [API regression](test/api.test.mjs), [CLI HTTP thật và giới hạn localhost](test/cli.test.mjs) |
-| Nguồn kế thừa | [NOTICE](NOTICE.md), [lịch sử tách từ DTDD](docs/repository-migration.md) |
-| CI | [Workflow backend, browser và container](.github/workflows/ci.yml), [các lần chạy](https://github.com/nguyenhonggiang2407/YangHooks/actions/workflows/ci.yml) |
+| Chủ đề            | Điểm bắt đầu review                                                                                                                                           |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| HMAC và byte body | [Framing, cửa sổ thời gian và timing-safe comparison](lib/signature.mjs), [test độc lập bằng Node crypto](test/foundation.test.mjs)                           |
+| Replay và lưu trữ | [Transaction, UNIQUE(endpoint_id, delivery) và kiểm tra owner](lib/store.mjs)                                                                                 |
+| HTTP và CLI       | [API regression](test/api.test.mjs), [CLI HTTP thật và giới hạn localhost](test/cli.test.mjs)                                                                 |
+| Nguồn kế thừa     | [NOTICE](NOTICE.md), [lịch sử tách từ DTDD](docs/repository-migration.md)                                                                                     |
+| CI                | [Workflow backend, browser và container](.github/workflows/ci.yml), [các lần chạy](https://github.com/nguyenhonggiang2407/YangHooks/actions/workflows/ci.yml) |
 
 CI là bằng chứng theo từng commit; badge không xác nhận một bản triển khai công
 khai. Lab hiện chạy cục bộ, dùng giao thức YangHooks v1 riêng.
