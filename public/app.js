@@ -387,9 +387,13 @@ $('rotateBtn').addEventListener('click', () => {
       const result = await api('/api/endpoints/' + endpoint.id + '/rotate', 'POST', {
         version: endpoint.version,
       });
-      await refresh();
+      state.endpoints = state.endpoints.map((item) =>
+        item.id === result.endpoint.id ? result.endpoint : item,
+      );
+      metadata();
       $('confirmDialog').close();
       keyDialog(result.secret, result.endpoint.name);
+      refresh().catch(() => toast('Đã xoay khóa. Chưa tải lại được hộp thư.', true));
     },
   );
 });

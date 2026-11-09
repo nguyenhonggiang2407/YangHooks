@@ -134,6 +134,39 @@ test('one-time key, external signature, literal HTML and rotation with old-key r
   await expect(page.locator('#endpointMeta')).toContainText('v2');
   await expect(page.locator('.event-row')).toHaveCount(2);
 });
+test('a failed inbox refresh cannot hide the newly rotated signing key', async (t) => {
+  const { page } = await workspace(t),
+    created = await create(page, 'Rotate through a read failure');
+  let rotated = false,
+    refreshFailed = false;
+  await page.route('**/api/endpoints', async (route) => {
+    if (rotated && route.request().method() === 'GET') {
+      refreshFailed = true;
+      await route.abort('failed');
+    } else await route.continue();
+  });
+  await page.route('**/api/endpoints/*/rotate', async (route) => {
+    const response = await route.fetch();
+    assert.equal(response.status(), 200);
+    rotated = true;
+    await route.fulfill({ response });
+  });
+
+  await page.locator('#rotateBtn').click();
+  await page.locator('#confirmSubmit').click();
+  await expect.poll(() => refreshFailed).toBe(true);
+  await expect(page.locator('#keyDialog')).toBeVisible();
+  await expect(page.locator('#confirmDialog')).not.toBeVisible();
+  const key = await page.locator('#newSecret').inputValue(),
+    body = '{"type":"rotation.recovered"}',
+    id = 'rotation-recovered-001';
+  assert.match(key, /^[a-f0-9]{64}$/);
+  assert.notEqual(key, created.secret);
+  assert.equal((await external(created.url, created.secret, body, id)).status, 401);
+  assert.equal((await external(created.url, key, body, id)).status, 201);
+  await page.getByRole('button', { name: 'Đã lưu khóa', exact: true }).click();
+  await expect(page.locator('#endpointMeta')).toContainText('v2');
+});
 test('duplicate, bad/stale signature, conflict, pause, resume and confirmed removal', async (t) => {
   const { page } = await workspace(t);
   await create(page, 'Replay lab');
